@@ -1,9 +1,25 @@
-name: check type errors
+name: check-type
 on: push
+concurrency:
+    group: ${{ github.workflow }}-origin/${{ github.head_ref }}
+    cancel-in-progress: true
 
 jobs:
-    my-job:
+    analyze:
         runs-on: ubuntu-latest
         steps:
+            - name: checkout
+              uses: actions/checkout@v4
+            - name: Setup pnpm
+              uses: pnpm/action-setup@v2
+              with:
+                  version: 9.5.0
+            - name: Setup Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version-file: '.node-version'
+                  cache: 'pnpm'
+            - name: Install dependencies
+              run: pnpm install
             - name: type-check
               run: pnpm type-check
