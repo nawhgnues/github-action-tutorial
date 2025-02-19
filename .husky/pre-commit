@@ -1,6 +1,3 @@
-#!/usr/bin/env sh
-. "$(dirname "$0")/h"
-
 echo "Hello, husky is running!"
 pnpm lint-staged
 echo "OK. done."
