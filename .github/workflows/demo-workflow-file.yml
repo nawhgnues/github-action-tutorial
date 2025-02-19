@@ -1,9 +1,9 @@
-name: heelo actions
+name: check type errors
 on: push
 
 jobs:
     my-job:
         runs-on: ubuntu-latest
         steps:
-            - name: my-step
-              run: echo "Hello actions"
+            - name: type-check
+              run: pnpm type-check
